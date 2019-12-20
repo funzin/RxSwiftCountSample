@@ -1,0 +1,22 @@
+language: objective-c
+osx_image: xcode11.2
+xcode_project: RxSwiftCountSample.xcodeproj
+xcode_scheme: RxSwiftCountSample
+xcode_sdk: iphonesimulator
+before_install:
+- brew update
+- brew install xcodegen
+- make install
+before_script:
+- set -o pipefail
+script:
+- xcodebuild -project RxSwiftCountSample.xcodeproj -scheme RxSwiftCountSample -configuration
+  Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=13.2.2,name=iPhone
+  11' test | xcpretty -c
+after_success:
+- bash <(curl -s https://codecov.io/bash)
+notifications:
+  email: false
+env:
+  global:
+    secure: IASNgugvqv3flCcq+7QlfclACscZ9eNxWL1MYFY2S0zTI9srPoPVbkBNQjLageTvX4pRV4mzL71VgIytFpMZcpCVlLzjavC4ahfSCqsGv75ZLVHwC9YlnT2tEWX9Gt+Q+8HN3wRGf+omnf0j73Up19JMTOCcJI4YozOlHE1tjRJ0lflCnVORKVeuJUGP0eUT4bPuks26Ek1B54AFqmyIlxVz1Zp+i+aU0p1KNMx5DVB9cpDVZspU2vWdpH3cqXAvvxdK1CLi+2Q5FwqUCcVl5riXBim2bx7QyrklUrMf3szYuzxBGLCmMtVHOwYDxeqPD4LyCYGrn/ilzt9SHNAE1ZD7kHQTd8kIdmczmp9xY1wlpQo+itOeMpIuH/W6S4T4Ca0q+xjMoOr0gYqvDVd5jAtYrcgrWG7ePMLmRQMeQaEc2W0n1+ojNqXqxAQkcy5lfIGruFGaxB9Kff0N7xJQBiMg/NDf0CwoMQuaAunZOD2TQc9vvzhxLCu6miFwZq+HF5JaTjGil/qxhCrIngIkv2XHa+4zOjVde3ZZ/KJUbZdoFv1r7JzQcdOlJz3IGGwPnWOEhSjXSo/Mhh3iv32q4IN1EnJIW5RQJN7bL2OuOoF9trOXnMihtz3mRqKiMo4kP0WZC8f61VYTyin7Cq2YeGO35BkJGhDbs7+Sd23TyTM=

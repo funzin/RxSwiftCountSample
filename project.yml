@@ -1,0 +1,38 @@
+name: RxSwiftCountSample
+options:
+  bundleIdPrefix: com.funzin
+configFiles:
+  Debug: Configurations/Debug.xcconfig
+  Release: Configurations/Release.xcconfig
+targets:
+  RxSwiftCountSample:
+    type: application
+    platform: iOS
+    deploymentTarget:
+      iOS:  "13.0"
+    sources: [RxSwiftCountSample]
+    settings:
+      base:
+        INFOPLIST_FILE: RxSwiftCountSample/Resource/Info.plist
+        CODE_SIGN_STYLE: Manual
+    configFiles:
+      Debug: Configurations/RxSwiftCountSample-Debug.xcconfig
+      Release: Configurations/RxSwiftCountSample-Release.xcconfig
+    dependencies:
+      - carthage: RxCocoa
+      - carthage: RxRelay
+      - carthage: RxSwift
+    scheme:
+      gatherCoverageData: true
+      testTargets:
+        - RxSwiftCountSampleTests
+  RxSwiftCountSampleTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [RxSwiftCountSampleTests]
+    dependencies:
+      - target: RxSwiftCountSample
+    configFiles:
+      Debug: Configurations/RxSwiftCountSampleTests-Debug.xcconfig
+      Release: Configurations/RxSwiftCountSampleTests-Release.xcconfig
+
